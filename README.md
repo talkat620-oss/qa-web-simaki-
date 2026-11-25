@@ -1,66 +1,75 @@
-# Simaki Website — Performance Testing
+# Simaki Website — QA Testing Project
 
 **Author:** Tal Katriel  
-**Project:** 5 Stars Software Testing Course — Gal Matalon  
-**Tool:** Apache JMeter 5.6.3
+**Project type:** Educational manual QA portfolio  
+**Course:** 5 Stars Software Testing Course by Gal Matalon
 
-## Overview
+## Project Overview
 
-Basic performance testing of selected public pages of the Simaki restaurant ordering website. The objective was to evaluate HTTP response times, response consistency and successful HTTP responses under controlled, low-volume conditions.
+This project evaluates the functionality, usability and reliability of Simaki, a web-based restaurant ordering system supporting delivery and self-pickup. The testing process included exploratory testing, test design, structured execution, defect reporting and a release-readiness assessment.
 
-## Test Configuration
+## Tools
 
-| Parameter | Configuration |
-|---|---|
-| Tool | Apache JMeter 5.6.3 |
-| Protocol | HTTPS |
-| Request method | HTTP GET |
-| Environment | Live production website |
-| Traffic model | Single-user / low-volume |
-| Request delay | Controlled, where appropriate |
+| Tool | Purpose |
+| --- | --- |
+| TestRail | Test case management, execution and traceability |
+| Jira | Defect reporting and tracking |
+| Apache JMeter | Basic HTTP performance checks |
+| Chrome, Firefox, Edge, Brave | Browser compatibility testing |
 
 ## Testing Scope
 
-- Homepage and menu HTTP response times
-- Response consistency across sequential GET requests
-- HTTP response code validation
-- Latency, elapsed time and response size (identified metrics)
-- Homepage response time comparison across four supported languages
+- Registration and login
+- Self-pickup and delivery workflows
+- Menu navigation and product customization
+- Shopping cart, pricing and checkout up to order submission
+- Localization (Hebrew, English, French and Russian)
+- Accessibility, usability and GUI testing
+- Browser compatibility and responsive layout checks
+- Basic HTTP performance testing
 
-## Language Performance Results
+## Test Execution Results
 
-Ten sequential requests per language were reported in the System Test Report (STR).
+| Status | Test cases | Percentage |
+| --- | ---: | ---: |
+| Passed | 71 | 55.0% |
+| Failed | 20 | 15.5% |
+| Blocked | 2 | 1.6% |
+| Untested | 36 | 27.9% |
+| **Total** | **129** | **100%** |
 
-| Language | Samples | Average (ms) | Minimum (ms) | Maximum (ms) | Error rate |
-|---|---:|---:|---:|---:|---:|
-| Hebrew | 10 | 1,726 | 588 | 4,275 | 0.00% |
-| English | 10 | 1,436 | 530 | 2,515 | 0.00% |
-| French | 10 | 1,512 | 549 | 3,714 | 0.00% |
-| Russian | 10 | 1,327 | 605 | 2,155 | 0.00% |
-| **Overall** | **40** | **1,500** | **530** | **4,275** | **0.00%** |
+93 of 129 cases received an execution outcome, including blocked cases (72.1%).
 
-## Key Findings
+## Defect Analysis
 
-- All 40 requests in the language comparison completed without reported errors.
-- Overall average HTTP response time was approximately 1.5 seconds.
-- Russian had the lowest observed average response time (1,327 ms).
-- Hebrew had the highest observed average (1,726 ms) and maximum (4,275 ms).
+24 unique defects were recorded in Jira. The STR summary reports the following severity distribution:
 
-## Conclusion and Limitations
+| Severity | Count |
+| --- | ---: |
+| S2 — Critical | 1 |
+| S3 — Major | 11 |
+| S4 — Minor | 9 |
+| Unclassified | 3 |
+| **Total** | **24** |
 
-The results provide a basic HTTP performance baseline under the reported test conditions. They do not represent full browser rendering times or establish production capacity under concurrent traffic. No performance acceptance threshold is documented for the language comparison.
+Reported findings included localization inconsistencies, contradictory product customization options, accessibility issues and checkout usability problems.
 
-The STR describes load and stress testing as excluded. However, test case T76 is marked Passed and refers to 50 concurrent users. This discrepancy requires verification against the original JMeter test plan and execution logs; no concurrency or capacity conclusions are drawn here.
+## Performance Testing
 
-## Supporting Evidence
+The STR reports 40 sequential HTTP requests across four website languages, with an average response time of approximately 1.5 seconds and a 0% request error rate. These results describe HTTP response times, not browser rendering times or system capacity.
 
-The results above are transcribed from the STR, sections 4.1–4.5 (pages 8–9). Original JMeter artifacts are not included in this README and should be added when available:
+## Project Documentation
 
-- JMeter test plan (`.jmx`)
-- Raw execution results (`.jtl` or `.csv`)
-- Summary Report and Aggregate Report exports
-- Sanitized screenshots of test configuration and results
+The System Test Report (STR) contains the testing methodology, functionality maps, business flows, TestRail execution results, Jira defect records, performance results and QA recommendations.
 
-## Project Context
+Additional supporting artifacts may be added as they become available.
 
-This is an educational QA portfolio project, not an official performance certification of the Simaki website. Any further testing against the live website should be authorized and avoid disrupting normal operations.
+## QA Conclusion
+
+**Educational release-readiness recommendation: NO-GO.**
+
+The report identifies unresolved quality concerns, incomplete test coverage and a lack of verified defect closure. Recommended next steps include defect resolution, completion of release-critical tests and regression testing.
+
+## Limitations
+
+Testing was conducted for educational purposes on a live website. Real payments, actual order submission, backend testing and penetration testing were outside the scope. The reported language performance comparison used low-volume requests; it does not establish load or stress capacity. The release-readiness recommendation is an educational assessment, not an operational decision by Simaki.
